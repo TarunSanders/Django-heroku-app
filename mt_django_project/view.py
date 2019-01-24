@@ -6,11 +6,14 @@ from django.shortcuts import render
 #	return HttpResponse('<p> my favourite number is {} </p?'.format(num))
 
 #from django.shortcuts import render
-#def index(request):
-	#table = run('Dalkeith')
-    
-	#return HttpResponse(table)
-
 def index(request):
+
+	#suburb_chosen = request.GET['suburb']
 	
-	return render(request,'fuel.html')
+	table = run(suburb_chosen)
+    
+	return HttpResponse(table)
+
+#def index(request):
+	
+#	return render(request,'fuel.html')
