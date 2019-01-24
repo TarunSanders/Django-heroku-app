@@ -10,7 +10,7 @@ def index(request):
 
 	#suburb_chosen = request.GET['suburb']
 	
-	table = run(suburb_chosen)
+	table = run('cannington')
     
 	return HttpResponse(table)
 
