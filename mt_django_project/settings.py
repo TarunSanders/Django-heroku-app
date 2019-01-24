@@ -25,7 +25,9 @@ SECRET_KEY = 'v-s0=)_hq$ml_^foo&jutb+@81(m4m#%j$&u!602w=f%@&a-9z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+'tarunsanders-fuelwatch-app.herokuapp.com'
+]
 
 
 # Application definition
