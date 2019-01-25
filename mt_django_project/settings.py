@@ -26,7 +26,8 @@ SECRET_KEY = 'v-s0=)_hq$ml_^foo&jutb+@81(m4m#%j$&u!602w=f%@&a-9z'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-'tarunsanders-fuelwatch-app.herokuapp.com'
+'tarunsanders-fuelwatch-app.herokuapp.com',
+'localhost' 
 ]
 
 
