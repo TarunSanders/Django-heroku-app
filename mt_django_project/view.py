@@ -25,7 +25,7 @@ def index(request):
 				<option value = "5"> Branded Diesel </option>
 			</select>
 
-            Suburb (type 'metro' for all metro regions): <input type="text" name="suburb">
+            Suburb and surrounding (defaults to all metro regions in WA): <input type="text" name="suburb">
   			<button type="submit"> Enter </button> 
 		</form>
     """
