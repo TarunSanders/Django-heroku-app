@@ -14,7 +14,7 @@ def index(request):
 	if suburbAndsurrounding == None:
 		FuelData = sortedFuel('metro',product_num)
 	else:
-		FuelData = sortedFuel('metro',product_num)
+		FuelData = sortedFuel(suburbAndsurrounding,product_num)
 	fuel_data_rows_string = """
         <form>
 			<select name = "product">
