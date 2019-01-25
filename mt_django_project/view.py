@@ -11,7 +11,7 @@ def index(request):
 	product_num = request.GET.get('product')
 
 	suburbAndsurrounding = request.GET.get('suburb')
-	if suburbAndsurrounding == None:
+	if suburbAndsurrounding == None or suburbAndsurrounding == '':
 		FuelData = sortedFuel('metro',product_num)
 	else:
 		FuelData = sortedFuel(suburbAndsurrounding,product_num)
