@@ -28,7 +28,7 @@ def getFuelWatchURL(suburbAndSurrounding,day,product):
 	if suburbAndSurrounding != 'metro':
 		URL += '&Suburb={Suburb}'
 	URL = URL.format(**fuelFilterAttr)
-	print(URL)
+	#print(URL)
 	return URL
 
 def get_fuel(suburbAndSurrounding,day, product): #gets list of dictionaries with fuel info and returns this data in own dictionary with imp info
@@ -49,7 +49,7 @@ def get_fuel(suburbAndSurrounding,day, product): #gets list of dictionaries with
 	return(dataImp)
 
 def by_price(x): # function handle for sort mutable method or sorted non-mutable function to sort prices in list of dictionaries x
-	return x['price']
+	return float(x['price'])
 
 def createfuelHTMLTABLE(data): # creates fuel table with columns Price, Location, Brand, Address, date and highlights tomorrow's price
 	blue ="#008080" #blue = "#008080"
@@ -70,7 +70,7 @@ def createfuelHTMLTABLE(data): # creates fuel table with columns Price, Location
 		
 	body = ''.join(
 					'''
-						<tbody>
+						
 							<tr bgcolor = {col}> 
 								<td> {price} </td> 
 								<td> {location} </td> 
@@ -78,15 +78,17 @@ def createfuelHTMLTABLE(data): # creates fuel table with columns Price, Location
 								<td> {address} </td> 
 								<td> {date} </td> 
 							</tr>
-						</tbody>
+						
 			'''.format(**entry,col = blue if entry['day'] == 'tomorrow' else white) #unpacking dictionary entry in data
 			for entry in data
 	)
 	argsT = [header, body]
 	tableF = '''
 			<table>
-				{}
-				{}
+					{}
+				<tbody>
+					{}
+				</tbody>
 			</table>
 			'''.format(*argsT)
 	return tableF
@@ -103,6 +105,7 @@ def sortedFuel(SuburbandSurrounding='metro', product = 1): #defaults to unleaded
 
 def getFuelTodayandTomorrow(SuburbandSurrounding,product):
 	Days = ['today','tomorrow']
+	
 	fuelInfo = reduce(operator.add, [get_fuel(SuburbandSurrounding,entry,product) for entry in Days])
 	return fuelInfo
 
@@ -110,10 +113,11 @@ def getFuelTodayandTomorrow(SuburbandSurrounding,product):
 if __name__ == '__main__':
 	#suburb = input('Choose suburb: ')
 	
-	data = sortedFuel('cannington',2) #executing main function nested with other defined functions
+	data = sortedFuel('metro',4) #executing main function nested with other defined functions
 	#pprint(data)
 	fuelTable = createfuelHTMLTABLE(data)
 	writeTable(fuelTable,'fuelPrice.html')
 #feedback from Robin Chew:
 # use of **dic for unpacking arguments in dictionaries and *l for unpacking arguments in lists. e.g. minus(a,b) let d = {'a': 5, 'b':2} and l = [5, 2] then minus(**d) == minus(b=2,a=5) == minus(5,2) = minus(*l) etc etc
 # create own dictionary
+#check pep 8 style guide
