@@ -17,19 +17,19 @@ def index(request):
 	
 	fuel_data_rows_string = """
         <form autocomplete="on">
-			<select name = "product">
-				<option value = "1"> Unleaded </option>
-				<option value = "2"> Premium Unleaded </option>
-				<option value = "3"> Diesel </option>
-				<option value = "4"> LPG </option>
-				<option value = "5"> Branded Diesel </option>
+			<select name = "product" autocomplete="on">
+				<option value = "1" {unl} > Unleaded </option>
+				<option value = "2" {prem} > Premium Unleaded </option>
+				<option value = "3"{dies} > Diesel </option>
+				<option value = "4" {l} > LPG </option>
+				<option value = "5" {bd}> Branded Diesel </option>
 			
 			</select>
 
-            Suburb and surrounding (type 'metro' for all metro regions): <input type="text" name="suburb">
+            Suburb and surrounding (type 'metro' for all metro regions): <input type="text" name="suburb" value ="{s}">
   			<button type="submit"> Enter </button> 
 		</form>
-    """
+    """.format(unl = 'selected' if product_num == '1' else "",prem = 'selected' if product_num == '2' else "",dies = 'selected' if product_num =='3' else "",l = 'selected' if product_num =='4' else "",bd= 'selected' if product_num =='5' else "",s=suburbAndsurrounding)
 
 	fuel_data_rows_string = "<html><body>" + fuel_data_rows_string + createfuelHTMLTABLE(FuelData)+"</body></html>"
     
