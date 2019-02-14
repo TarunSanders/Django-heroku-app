@@ -26,7 +26,7 @@ def index(request):
 			
 			</select>
 
-            Suburb and surrounding (defaults to all metro regions in WA): <input type="text" name="suburb">
+            Suburb and surrounding (type 'metro' for all metro regions): <input type="text" name="suburb">
   			<button type="submit"> Enter </button> 
 		</form>
     """
