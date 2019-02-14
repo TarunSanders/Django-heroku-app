@@ -14,7 +14,7 @@ def index(request):
 	
 
 	FuelData = sortedFuel(suburbAndsurrounding,product_num)
-	
+	"""
 	fuel_data_rows_string = """
         <form>
 			<select name = "product">
@@ -29,6 +29,7 @@ def index(request):
             Suburb and surrounding (defaults to all metro regions in WA): <input type="text" name="suburb">
   			<button type="submit"> Enter </button> 
 		</form>
+		"""
     """
 	#Suburb (type 'metro' for all metro regions): <input type="text" name="suburb">
   	#		<button type="submit"> Enter </button> 
