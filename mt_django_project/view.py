@@ -16,7 +16,7 @@ def index(request):
 	FuelData = sortedFuel(suburbAndsurrounding,product_num)
 	
 	fuel_data_rows_string = """
-        <form>
+        <form autocomplete="on">
 			<select name = "product">
 				<option value = "1"> Unleaded </option>
 				<option value = "2"> Premium Unleaded </option>
