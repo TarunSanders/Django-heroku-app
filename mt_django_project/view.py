@@ -9,12 +9,11 @@ from django.shortcuts import render
 def index(request):
 
 	product_num = request.GET.get('product')
-
+	
 	suburbAndsurrounding = request.GET.get('suburb')
-	if suburbAndsurrounding == None or suburbAndsurrounding == '':
-		FuelData = sortedFuel('metro',product_num)
-	else:
-		FuelData = sortedFuel(suburbAndsurrounding,product_num)
+	
+
+	FuelData = sortedFuel(suburbAndsurrounding,product_num)
 	
 	fuel_data_rows_string = """
         <form>
@@ -24,6 +23,7 @@ def index(request):
 				<option value = "3"> Diesel </option>
 				<option value = "4"> LPG </option>
 				<option value = "5"> Branded Diesel </option>
+			
 			</select>
 
             Suburb and surrounding (defaults to all metro regions in WA): <input type="text" name="suburb">
