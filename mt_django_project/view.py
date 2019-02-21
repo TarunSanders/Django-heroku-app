@@ -17,11 +17,10 @@ def index(request):
         
         prodString = ''.join("""
                                 <option value = {id} {select}> {prod} </option>
-							 """.format(id = str(j+1), prod = entry, select = 'selected' if j+1 == i else '')
-							for j, entry in enumerate(prodName)
-							)
+                            """.format(id = str(j+1), prod = entry, select = 'selected' if j+1 == i else '')
+                            for j, entry in enumerate(prodName)
+                            )
        
-
         prodString = '<select name = "product" autocomplete="on">' + prodString + '</select>'
 		
         return prodString
@@ -30,7 +29,7 @@ def index(request):
     suburbForm = """
                     Suburb and surrounding (type 'metro' for all metro regions): <input type="text" name="suburb" value ="{s}">
                     <button type="submit"> Enter </button> 
-				 """.format(s=suburbAndsurrounding)
+                """.format(s=suburbAndsurrounding)
 	
 	
     
