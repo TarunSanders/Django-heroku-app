@@ -22,8 +22,8 @@ def index(request):
 		
 		
 		prodString = ''.join("""
-								<option value = {id}{select}> {prod} </option>
-							""".format(id = str(j), prod = entry, select = 'selected' if j == i else '')
+								<option value = {id} {select}> {prod} </option>
+							""".format(id = str(j+1), prod = entry, select = 'selected' if j+1 == i else '')
 							for j, entry in enumerate(prodName)
 							)
 		prodString = '<select name = "product" autocomplete="on">' + prodString + '</select>'
@@ -36,10 +36,10 @@ def index(request):
 				 """.format(s=suburbAndsurrounding)
 	
 	
-	prod = int(product_num) if product_num != None else 0
+	num = int(product_num) if product_num != None else 0
 	
 	
-	fuel_data_rows_string = "<html><body>" + "<form autocomplete='on'>" + ProdForm(prod) + suburbForm + "</form>"+createfuelHTMLTABLE(FuelData)+"</body></html>"
-    
+	fuel_data_rows_string = "<html><body>" + "<form autocomplete='on'>" + ProdForm(num) + suburbForm + "</form>"+createfuelHTMLTABLE(FuelData)+"</body></html>"
+    #print(prodString)
 	return HttpResponse(fuel_data_rows_string)
 
