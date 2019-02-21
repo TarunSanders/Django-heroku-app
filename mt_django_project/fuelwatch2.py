@@ -47,7 +47,7 @@ def get_fuel(suburbAndSurrounding,day, product): #gets list of dictionaries with
                 for entry in data['entries']
               ]
 	
-	return(dataImp)
+    return(dataImp)
 
 def by_price(x): # function handle for sort mutable method or sorted non-mutable function to sort prices in list of dictionaries x
     return float(x['price'])
