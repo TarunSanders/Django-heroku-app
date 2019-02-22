@@ -13,14 +13,21 @@ def index(request):
 	
     def ProdForm(i):
 		
-        prodName = ['Unleaded','Premium Unleaded','Diesel', 'LPG', 'Branded Diesel']
+        prodOptionNames = ['Unleaded','Premium Unleaded','Diesel', 'LPG', 'Branded Diesel']
         
-        prodString = ''.join("""
-                                <option value = {id} {select}> {prod} </option>
-                            """.format(id = str(j+1), prod = entry, select = 'selected' if j+1 == i else '')
-                            for j, entry in enumerate(prodName)
-                            )
-       
+     
+        #prodString = ''.join(f"""
+        #                      <option value = {id} {select}> {prod} </option>
+        #                    """.format(id = str(j+1), prod = entry, select = 'selected' if j+1 == i else '')
+        #                    for j, entry in enumerate(prodOptionNamesName)
+        #                   )
+    
+        
+        prodString = ''.join(f"""
+                              <option value = {str(j+1)} {'selected' if j+1 == i else ''}> {entry} </option>
+                                    """
+                            for j, entry in enumerate(prodOptionNames))
+        
         prodString = '<select name = "product" autocomplete="on">' + prodString + '</select>'
 		
         return prodString
