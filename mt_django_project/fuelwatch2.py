@@ -8,34 +8,39 @@ from pprint import pprint
 #
 
 #note defaults to metro and all products for both days
-def getFuelWatchURL(suburbAndSurrounding,day,product):
-
+def getFuelWatchURL(suburb,day,product,surrounding):
+    surrounding = surrounding.lower()
+    if surrounding == 'yes' or surrounding == 'no':
 	# product = ? query strings
-    fuelChoiceEnc = {
-                '1': '1',#unleaded
-                '2': '2', #premium unleaded
-                '3': '4', #'diesel'
-                '4': '5', #'LPG'
-                '5': '11',} #branded diesel
-    product_id = fuelChoiceEnc.get(str(product),'invalid')
-    fuelFilterAttr = {
-                    "fueltype": product_id,
-                    "Day": day,
-                    "Suburb": suburbAndSurrounding,
-					}
-    URL = 'https://www.fuelwatch.wa.gov.au/fuelwatch/fuelWatchRSS?Day={Day}'
+        fuelChoiceEnc = {
+                    '1': '1',#unleaded
+                    '2': '2', #premium unleaded
+                    '3': '4', #'diesel'
+                    '4': '5', #'LPG'
+                    '5': '11',} #branded diesel
+        product_id = fuelChoiceEnc.get(str(product),'invalid')
+        fuelFilterAttr = {
+                        "fueltype": product_id,
+                        "Day": day,
+                        "Suburb": suburb,
+                        "Surrounding": surrounding,
+                        }
+        URL = 'https://www.fuelwatch.wa.gov.au/fuelwatch/fuelWatchRSS?Day={Day}'
 	
-    if product_id != 'invalid':
-        URL += '&Product={fueltype}'
-    if suburbAndSurrounding != 'metro':
-        URL += '&Suburb={Suburb}'
-    URL = URL.format(**fuelFilterAttr)
-    #print(URL)
+        if product_id != 'invalid':
+            URL += '&Product={fueltype}'
+        if suburb != 'metro':
+            URL += '&Suburb={Suburb}'
+        if surrounding == 'no':
+            URL += '&Surrounding={Surrounding}'
+        URL = URL.format(**fuelFilterAttr)
+        #print(URL)
+    else:
+        exit('invalid input in surrounding parameter flag')
     return URL
 
-def get_fuel(suburbAndSurrounding,day, product): #gets list of dictionaries with fuel info and returns this data in own dictionary with imp info
-	#product_id = 1 #1: unleaded
-    url = getFuelWatchURL(suburbAndSurrounding,day,product)
+def get_fuel(suburb,day,product,surrounding): #gets list of dictionaries with fuel info and returns this data in own dictionary with imp info
+    url = getFuelWatchURL(suburb,day,product,surrounding)
 	#print(url)
     data = feedparser.parse(url) #grabs RSS data from url and converts RSS to dictionary format if not already
     #pprint(data)
@@ -98,22 +103,22 @@ def writeTable(tableDat,fileName,): #writing function for table
     with open(fileName,'w') as f:
         f.write(tableDat)	
 
-def sortedFuel(SuburbandSurrounding='metro', product = 1): #defaults to unleaded
+def sortedFuel(Suburb='metro', product = 1, surrounding = 'yes'): #defaults to unleaded and selection of surrounding suburbs
 	
-    sortedfuelInfo = sorted(getFuelTodayandTomorrow(SuburbandSurrounding,product), key = by_price)
+    sortedfuelInfo = sorted(getFuelTodayandTomorrow(Suburb,product,surrounding), key = by_price)
 
     return sortedfuelInfo
 
-def getFuelTodayandTomorrow(SuburbandSurrounding,product):
+def getFuelTodayandTomorrow(suburb,product,surrounding):
     Days = ['today','tomorrow']
-    fuelInfo = reduce(operator.add, [get_fuel(SuburbandSurrounding,entry,product) for entry in Days])
+    fuelInfo = reduce(operator.add, [get_fuel(suburb,entry,product,surrounding) for entry in Days])
     return fuelInfo
 
 #print(__name__) #__name__ by default is main() from command prompt otherwise if importing it is name of file fuelwatch2.py
 if __name__ == '__main__':
 	#suburb = input('Choose suburb: ')
 	
-    data = sortedFuel('cannington',2) #executing main function nested with other defined functions
+    data = sortedFuel('cannington') #executing main function nested with other defined functions
     #pprint(data)
     fuelTable = createfuelHTMLTABLE(data)
     writeTable(fuelTable,'fuelPrice.html')

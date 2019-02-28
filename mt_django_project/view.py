@@ -6,26 +6,26 @@ def index(request):
 
     product_num = request.GET.get('product')
 	
-    suburbAndsurrounding = request.GET.get('suburb')
+    suburb = request.GET.get('suburb')
     
-    FuelData = sortedFuel(suburbAndsurrounding,product_num)
+    FuelData = sortedFuel(suburb,product_num)
 	
 	
     def ProdForm(i):
 		
         prodOptionNames = ['Unleaded','Premium Unleaded','Diesel', 'LPG', 'Branded Diesel']
         
-     
+     ### old usage of .format ####
         #prodString = ''.join(f"""
         #                      <option value = {id} {select}> {prod} </option>
         #                    """.format(id = str(j+1), prod = entry, select = 'selected' if j+1 == i else '')
         #                    for j, entry in enumerate(prodOptionNamesName)
         #                   )
     
-        
+        ###using python3 f string feature
         prodString = ''.join(f"""
                               <option value = {str(j+1)} {'selected' if j+1 == i else ''}> {entry} </option>
-                                    """
+                              """
                             for j, entry in enumerate(prodOptionNames))
         
         prodString = '<select name = "product" autocomplete="on">' + prodString + '</select>'

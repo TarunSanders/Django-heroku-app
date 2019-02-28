@@ -21,11 +21,12 @@ urlpatterns = [
 ]
 
 from django.urls import re_path
-from mt_django_project.view import index #index for httpresponse and index2 for templates
+from mt_django_project.view2 import index #index for httpresponse and index2 for templates
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('^$', index),
+    re_path('^table$', index),
+     re_path('^$', index),
     # Equivalent to below
     # path('', index),
 ]
