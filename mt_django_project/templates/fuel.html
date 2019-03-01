@@ -5,12 +5,66 @@
 </script>
 {% endcomment%}
 <html>
-	<body>
-		<form  action = "/table" method ="GET" autocomplete = "on"> {# action = "/" submits to the particular url #}
-			{{options|safe}}  
-			{{suburbsInput|safe}}
-		</form>
-		{{fuelTable|safe}}
+	<HEAD>
+		<TITLE> For cheaper fuel in Western Australia </TITLE>
 		
+	</HEAD>
+	<head>
+	<style>
+		table, th, td {
+		border: 1px solid black;
+		border-collapse: collapse;
+		}
+	</style>
+	</head>
+	<body>
+		<H1 align = "center"> <font color = "blue"> For Cheaper fuel in Western Australia </font> </H1>
+		<H2> Filter prices by product and suburb: </H2>
+		<form  id = "productAndSuburb" method ="GET" autocomplete = "on"> {# action = "/" submits to the particular url #}
+			
+			
+			{{suburbs|safe}} <br> <br>
+			{{surrounding|safe}} <br><br>
+			
+			
+			
+			<b> Fuel Product: </b>
+			<select id = "productList" name = "product" >
+				{{options|safe}}
+			</select> <br>
+			
+		</form>
+		<H3 align = 'left'> Key: <br>
+		<table align = 'left'>
+			<thead> 
+				<th> Day </th>
+				<th> Colour  </th>
+			</thead>
+			<tbody> 
+				<tr>
+					<td> Today </td>
+					<td> White </td>
+				</tr>
+				<tr>
+					<td> Tomorrow </td>
+					<td bgcolor = "#008080"> Cyan </td>
+				</tr>
+			</tbody>
+		</table> 
+	
+		<H2 align = 'center'> Fuel prices (note: after 2:30 pm tomorrow prices also displayed) </H2> <br> <br>
+		
+		
+		{{fuelTable|safe}}  <br>
+		<script>
+			var form = document.getElementById('productAndSuburb');
+			var productSelectBox = document.getElementById('productList');
+			var surroundingCheckBox = document.getElementById('surroundingInput');
+			function enter() {
+				form.submit();
+			}
+			productSelectBox.onchange = enter;
+			surroundingCheckBox.onchange = enter;
+		</script>
 	</body>
 </html>

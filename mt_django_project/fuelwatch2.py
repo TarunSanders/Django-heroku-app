@@ -92,7 +92,7 @@ def createfuelHTMLTABLE(data): # creates fuel table with columns Price, Location
                     for entry in data)
     argsT = [header, body]
     tableF = '''
-                <table>
+                <table align = "center" style = "width:100%">
                     {}
                     {}
                 </table>
@@ -103,7 +103,7 @@ def writeTable(tableDat,fileName,): #writing function for table
     with open(fileName,'w') as f:
         f.write(tableDat)	
 
-def sortedFuel(Suburb='metro', product = 1, surrounding = 'yes'): #defaults to unleaded and selection of surrounding suburbs
+def sortedFuel(Suburb='metro', product = 1, surrounding = 'no'): #defaults to unleaded and selection of surrounding suburbs
 	
     sortedfuelInfo = sorted(getFuelTodayandTomorrow(Suburb,product,surrounding), key = by_price)
 

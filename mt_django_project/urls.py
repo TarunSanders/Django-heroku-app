@@ -25,8 +25,8 @@ from mt_django_project.view2 import index #index for httpresponse and index2 for
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('^table$', index),
-     re_path('^$', index),
+    #re_path('^table$', index),
+    re_path('^$', index),
     # Equivalent to below
     # path('', index),
 ]
